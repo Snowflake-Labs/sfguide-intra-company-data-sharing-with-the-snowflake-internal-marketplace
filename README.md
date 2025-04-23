@@ -1,0 +1,1 @@
+# sfguide-intra-company-data-sharing-with-the-snowflake-internal-marketplace
