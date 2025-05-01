@@ -1,5 +1,7 @@
 -- Run this in hol_account2, logged in as supply_chain_admin user
--- Make sure you run this as ACCOUNTADMINUSE ROLE accountadmin;
+-- Make sure you run this as ACCOUNTADMIN
+
+USE ROLE accountadmin;
 
 CREATE OR REPLACE WAREHOUSE compute_wh WAREHOUSE_SIZE=small INITIALLY_SUSPENDED=TRUE;
 GRANT ALL ON WAREHOUSE compute_wh TO ROLE public;

@@ -1,4 +1,4 @@
--- Run this in HOL_ACCOUNT1
+-- Run this in HOL_ACCOUNT1 as user sales_admin
 -- This script creates tables with data by copying from the shared TCP-H Data in the SNOWFLAKE_SAMPLE_DATA Share
 
 
@@ -7,6 +7,8 @@ USE WAREHOUSE COMPUTE_WH;
 
 CREATE DATABASE tpch;
 CREATE SCHEMA tpch.sf1;
+
+USE TPCH.SF1;
 
 CREATE OR REPLACE TABLE PART AS SELECT * FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.PART;
 CREATE OR REPLACE TABLE PARTSUPP AS SELECT * FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF1.PARTSUPP;
@@ -84,9 +86,89 @@ GRANT USAGE ON schema SF1    TO ROLE sales_data_scientist_role WITH GRANT OPTION
 GRANT ALL ON ALL tables    IN DATABASE tpch TO ROLE sales_data_scientist_role WITH GRANT OPTION;
 GRANT ALL ON ALL views     IN DATABASE tpch TO ROLE sales_data_scientist_role WITH GRANT OPTION;
 GRANT ALL ON ALL functions IN DATABASE tpch TO ROLE sales_data_scientist_role WITH GRANT OPTION;
+GRANT ALL ON ALL tables    IN SCHEMA tpch.sf1 TO ROLE sales_data_scientist_role WITH GRANT OPTION;
+GRANT ALL ON ALL views     IN SCHEMA tpch.sf1 TO ROLE sales_data_scientist_role WITH GRANT OPTION;
+GRANT ALL ON ALL functions IN SCHEMA tpch.sf1 TO ROLE sales_data_scientist_role WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON ALL SCHEMAS IN DATABASE TPCH TO ROLE sales_data_scientist_role;
 
 GRANT USAGE ON DATABASE tpch TO ROLE marketing_analyst_role WITH GRANT OPTION;
 GRANT USAGE ON schema SF1    TO ROLE marketing_analyst_role WITH GRANT OPTION;
 GRANT ALL ON ALL tables    IN DATABASE tpch TO ROLE marketing_analyst_role WITH GRANT OPTION;
 GRANT ALL ON ALL views     IN DATABASE tpch TO ROLE marketing_analyst_role WITH GRANT OPTION;
 GRANT ALL ON ALL functions IN DATABASE tpch TO ROLE marketing_analyst_role WITH GRANT OPTION;
+GRANT ALL ON ALL tables    IN SCHEMA tpch.sf1 TO ROLE marketing_analyst_role WITH GRANT OPTION;
+GRANT ALL ON ALL views     IN SCHEMA tpch.sf1 TO ROLE marketing_analyst_role WITH GRANT OPTION;
+GRANT ALL ON ALL functions IN SCHEMA tpch.sf1 TO ROLE marketing_analyst_role WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON ALL SCHEMAS IN DATABASE TPCH TO ROLE marketing_analyst_role;
+
+
+-------------------------------------------
+-- Create Sample Listing 1 in hol_accoun1
+-- Login into hol_account1 as sales_admin
+--------------------------------------------
+
+use role sales_data_scientist_role;
+
+CREATE OR REPLACE SHARE share_customer360;
+GRANT USAGE ON DATABASE tpch TO SHARE share_customer360;
+GRANT USAGE ON SCHEMA tpch.sf1 TO SHARE share_customer360;
+GRANT SELECT ON TABLE tpch.sf1.customer TO SHARE share_customer360;
+GRANT SELECT ON TABLE tpch.sf1.nation TO SHARE share_customer360;
+GRANT USAGE ON FUNCTION tpch.sf1.ORDERS_PER_CUSTOMER(NUMBER) TO SHARE share_customer360;
+
+
+CREATE ORGANIZATION LISTING CUSTOMER360_LIGHT
+SHARE share_customer360
+AS $$
+title: "Customer360 Light"
+description: "# Business Description:\n\nThis data product offers a holistic view\
+  \ of our customers, integrating data from various touchpoints. Over time this data\
+  \ product will include transactional history (orders), engagement metrics (website\
+  \ visits), demographic information (age, location), and support interactions (tickets,\
+  \ chat logs). This comprehensive profile enables a deeper understanding of customer\
+  \ behavior, preferences, and needs, facilitating personalized experiences and improved\
+  \ decision-making across sales, marketing, and customer service."
+resources:
+  documentation: "http://www.snowflake.com/data-mesh"
+listing_terms:
+  type: "CUSTOM"
+  link: "https://www.snowflake.com/resource/how-to-knit-your-data-mesh-on-snowflake/"
+auto_fulfillment:
+  refresh_type: "SUB_DATABASE"
+  refresh_schedule: "1 MINUTE"
+data_dictionary:
+  featured:
+    database: "TPCH"
+    objects:
+    - schema: "SF1"
+      domain: "TABLE"
+      name: "CUSTOMER"
+data_preview:
+  has_pii: false
+usage_examples:
+- title: "Get orders for one customer"
+  description: ""
+  query: "SELECT customer_name, country, orderkey, orderdate, AMOUNT\nFROM TABLE(sf1.orders_per_customer(60001));"
+- title: "Get Customer Info"
+  description: ""
+  query: "select *\nfrom sf1.customer, sf1.nation\nwhere c_nationkey = n_nationkey\n\
+    limit 100;\n"
+data_attributes:
+  refresh_rate: "WEEKLY"
+  geography:
+    geo_option: "NOT_APPLICABLE"
+  time:
+    granularity: "EVENT_BASED"
+    time_range:
+      time_frame: "LAST"
+      units: "MONTHS"
+      value: 1
+organization_profile: "SALES"
+organization_targets:
+  discovery:
+  - all_internal_accounts: true
+locations:
+  access_regions:
+  - name: "ALL"
+request_approval_type: "REQUEST_AND_APPROVE_IN_SNOWFLAKE"
+$$;
