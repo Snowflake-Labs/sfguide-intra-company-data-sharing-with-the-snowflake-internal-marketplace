@@ -21,7 +21,7 @@ SELECT $my_curr_account;
 ALTER ACCOUNT identifier($my_curr_account) 
   RENAME TO hol_account1 SAVE_OLD_URL = true;
 
--- Enable users with the ACCOUNTADMIN role to set up Cross-Cloud Auto-Fulfillmen
+-- Enable users with the ACCOUNTADMIN role to set up Cross-Cloud Auto-Fulfillment
 SELECT SYSTEM$ENABLE_GLOBAL_DATA_SHARING_FOR_ACCOUNT('hol_account1');
 SELECT SYSTEM$ENABLE_GLOBAL_DATA_SHARING_FOR_ACCOUNT('hol_account2');
 
