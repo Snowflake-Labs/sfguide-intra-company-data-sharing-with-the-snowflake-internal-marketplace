@@ -15,8 +15,9 @@ CREATE OR REPLACE WAREHOUSE compute_wh WAREHOUSE_SIZE=small INITIALLY_SUSPENDED=
 GRANT ALL ON WAREHOUSE compute_wh TO ROLE public;
 
 CREATE OR REPLACE ROLE sales_data_scientist_role;
-GRANT CREATE SHARE ON ACCOUNT TO ROLE sales_data_scientist_role;
-GRANT CREATE ORGANIZATION LISTING ON ACCOUNT TO ROLE sales_data_scientist_role;
+GRANT CREATE SHARE ON ACCOUNT                    TO ROLE sales_data_scientist_role;
+GRANT CREATE ORGANIZATION LISTING ON ACCOUNT     TO ROLE sales_data_scientist_role;
+GRANT MANAGE LISTING AUTO FULFILLMENT ON ACCOUNT TO ROLE sales_data_scientist_role;
 GRANT ROLE sales_data_scientist_role TO USER sales_admin;
 
 SET my_user_var = CURRENT_USER();
