@@ -1,7 +1,11 @@
-# sfguide-intra-company-data-sharing-with-the-snowflake-internal-marketplace
+# Intra-Company Data Sharing With The Snowflake Internal Marketplace
 
-This repository contains the code for the Quickstart
 
-Intra-Company Data Sharing with the Snowflake Internal Marketplace
 
-[https://github.com/Snowflake-Labs/sfquickstarts/blob/master/site/sfguides/src/intra_company_data_sharing_with_the_snowflake_internal_marketplace/](https://github.com/Snowflake-Labs/sfquickstarts/blob/master/site/sfguides/src/intra_company_data_sharing_with_the_snowflake_internal_marketplace/)
+## Overview 
+
+Sharing information between departments or business units ("domains") of a company is critical for success. Sharing and consuming data assets is more successful if data is shared as a product. A data product is a collection of related data objects plus metadata, such as a business description, ownership and contact information, service level objectives, data dictionary, and more.
+
+## Step-by-Step Guide
+
+For prerequisites, environment setup, step-by-step guide and instructions, please refer to the [QuickStart Guide](https://quickstarts.snowflake.com/guide/internal_marketplace_intra_org_sharing/index.html?index=..%2F..index#0). 
