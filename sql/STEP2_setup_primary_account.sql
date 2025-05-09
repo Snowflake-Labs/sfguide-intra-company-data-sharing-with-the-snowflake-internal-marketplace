@@ -37,7 +37,6 @@ GRANT ROLE sales_data_scientist_role TO USER sales_admin;
 GRANT ROLE accountadmin              TO USER sales_admin;  -- for simplicity in this lab
 GRANT CREATE SHARE ON ACCOUNT                    TO ROLE sales_data_scientist_role;
 GRANT CREATE ORGANIZATION LISTING ON ACCOUNT     TO ROLE sales_data_scientist_role;
-GRANT MANAGE LISTING AUTO FULFILLMENT ON ACCOUNT TO ROLE sales_data_scientist_role;
 
 
 -- Next, create a user and role for the marketing domain:
@@ -59,8 +58,10 @@ CREATE OR REPLACE USER marketing_admin
 GRANT ROLE marketing_analyst_role TO USER marketing_admin;
 GRANT CREATE SHARE ON ACCOUNT                    TO ROLE marketing_analyst_role;
 GRANT CREATE ORGANIZATION LISTING ON ACCOUNT     TO ROLE marketing_analyst_role;
-GRANT MANAGE LISTING AUTO FULFILLMENT ON ACCOUNT TO ROLE sales_data_scientist_role;
 
+USE ROLE orgadmin;
+GRANT MANAGE LISTING AUTO FULFILLMENT ON ACCOUNT TO ROLE sales_data_scientist_role;
+GRANT MANAGE LISTING AUTO FULFILLMENT ON ACCOUNT TO ROLE marketing_analyst_role;
 
 -- Continue to run this code in your PRIMARY account
 -- Create a secondary account in the same region (default!):
