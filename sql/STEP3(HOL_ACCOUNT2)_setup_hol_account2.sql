@@ -13,5 +13,8 @@ GRANT ROLE supply_chain_admin_role TO USER supply_chain_admin;
 ALTER USER supply_chain_admin 
   SET DEFAULT_ROLE = supply_chain_admin_role;
 
+ALTER USER supply_chain_admin 
+  SET DEFAULT_WAREHOUSE = compute_wh;
+
 USE ROLE supply_chain_admin_role;
 CREATE DATABASE supply_chain_db;
