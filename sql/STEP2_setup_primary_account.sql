@@ -1,3 +1,4 @@
+-- sql/STEP2_setup_primary_account.sql
 -- Run this code in your PRIMARY Account
 -- Make sure you update the four variables below: email_var, firstname_var, lastname_var, pwd_var
 

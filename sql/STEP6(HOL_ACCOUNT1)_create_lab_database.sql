@@ -1,3 +1,4 @@
+-- sql/STEP6(HOL_ACCOUNT1)_create_lab_database.sql
 -- Run this in HOL_ACCOUNT1 as user sales_admin
 -- This script creates tables with data by copying from the shared TCP-H Data in the SNOWFLAKE_SAMPLE_DATA Share
 

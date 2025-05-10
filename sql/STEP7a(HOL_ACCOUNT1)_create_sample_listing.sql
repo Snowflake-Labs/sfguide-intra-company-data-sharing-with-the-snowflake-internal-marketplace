@@ -1,3 +1,4 @@
+-- sql/STEP7a(HOL_ACCOUNT1)_create_sample_listing.sql
 -------------------------------------------
 -- Create Sample Listing 2 in hol_account1
 -- Login into hol_account1 as marketing_admin

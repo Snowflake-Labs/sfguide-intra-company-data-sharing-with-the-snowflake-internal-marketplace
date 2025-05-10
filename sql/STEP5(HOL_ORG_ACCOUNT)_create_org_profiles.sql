@@ -1,3 +1,4 @@
+-- sql/STEP5(HOL_ORG_ACCOUNT)_create_org_profiles.sql
 -----------------------------------------------
 -- Create data provider profiles
 -- Each team or business unit that shares data products 

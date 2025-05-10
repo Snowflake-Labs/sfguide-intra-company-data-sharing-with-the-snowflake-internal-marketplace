@@ -1,3 +1,4 @@
+-- sql/STEP4(HOL_ORG_ACCOUNT)_configure_org_account.sql
 -- Login to the Organization Account HOL_ORG_ACCOUNT and execute the following commands in a worksheet.
 
 USE ROLE accountadmin;

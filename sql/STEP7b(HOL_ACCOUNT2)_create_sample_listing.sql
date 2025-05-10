@@ -1,8 +1,10 @@
+-- sql/STEP7b(HOL_ACCOUNT2)_create_sample_listing.sql
 -------------------------------------------
 -- Create Sample Listing 3 in hol_account2
 -- Login into hol_account2 as supply_chain_admin
 --------------------------------------------
 use role supply_chain_admin_role;
+use warehouse compute_wh;
 
 -- Import sample data so that we have something to share
 CREATE DATABASE SNOWFLAKE_SAMPLE_DATA FROM SHARE SFC_SAMPLES.SAMPLE_DATA;
