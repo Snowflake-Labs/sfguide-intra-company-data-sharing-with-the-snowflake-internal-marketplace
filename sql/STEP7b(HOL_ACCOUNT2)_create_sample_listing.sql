@@ -7,7 +7,7 @@ use role supply_chain_admin_role;
 use warehouse compute_wh;
 
 -- Import sample data so that we have something to share
-CREATE DATABASE SNOWFLAKE_SAMPLE_DATA FROM SHARE SFC_SAMPLES.SAMPLE_DATA;
+CREATE OR REPLACE DATABASE SNOWFLAKE_SAMPLE_DATA FROM SHARE SFC_SAMPLES.SAMPLE_DATA;
 GRANT IMPORTED PRIVILEGES ON DATABASE SNOWFLAKE_SAMPLE_DATA TO ROLE PUBLIC;
 
 create or replace database supply_chain_db;
@@ -15,6 +15,7 @@ create or replace schema supply_chain_db.supplier_details;
 
 use database supply_chain_db;
 use schema supplier_details;
+use warehouse compute_wh;
 
 CREATE OR REPLACE TABLE PART (
 	P_PARTKEY NUMBER(38,0) COMMENT 'Unique part ID',
