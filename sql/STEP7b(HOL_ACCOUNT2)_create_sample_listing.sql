@@ -76,7 +76,8 @@ listing_terms:
   link: "http://www.snowflake.com/data-mesh"
 auto_fulfillment:
   refresh_type: "SUB_DATABASE"
-  refresh_schedule: "1440 MINUTE"
+  refresh_schedule: "10 MINUTE"
+  refresh_schedule_override: TRUE
 data_dictionary:
   featured:
     database: "SUPPLY_CHAIN_DB"
