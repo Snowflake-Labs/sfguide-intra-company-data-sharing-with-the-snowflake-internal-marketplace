@@ -137,6 +137,7 @@ listing_terms:
 auto_fulfillment:
   refresh_type: "SUB_DATABASE"
   refresh_schedule: "1 MINUTE"
+  refresh_schedule_override: TRUE
 data_dictionary:
   featured:
     database: "TPCH"
